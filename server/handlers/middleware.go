@@ -65,6 +65,7 @@ func ValidateToken(c *gin.Context) {
 }
 
 var paramRegex = regexp.MustCompile("^[-_[:alnum:]]+$")
+var queueRegex = regexp.MustCompile(`^[-_[:alnum:]]+(\.(\{low\}|\{normal\}|\{high\}))?$`)
 var multiQueuesRegex = regexp.MustCompile("^[-_,[:alnum:]]+$")
 
 // Validate namespace and queue names don't contain any illegal characters
@@ -81,7 +82,7 @@ func ValidateParams(c *gin.Context) {
 		c.Abort()
 		return
 	}
-	if strings.HasPrefix(q, "_") || !paramRegex.MatchString(q) {
+	if strings.HasPrefix(q, "_") || !queueRegex.MatchString(q) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "queue name contains forbidden characters"})
 		c.Abort()
 		return
@@ -96,9 +97,14 @@ func ValidateMultiConsume(c *gin.Context) {
 		c.Abort()
 		return
 	}
-	if !multiQueuesRegex.MatchString(q) {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "queue name contains forbidden characters"})
-		c.Abort()
-		return
+	for _, queue := range strings.Split(q, ",") {
+		if queue == "" {
+			continue
+		}
+		if !queueRegex.MatchString(queue) {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "queue name contains forbidden characters"})
+			c.Abort()
+			return
+		}
 	}
 }
