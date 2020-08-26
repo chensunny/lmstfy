@@ -10,7 +10,7 @@ import (
 
 type Job interface {
 	Namespace() string
-	Queue() string
+	Queue() Queue
 	ID() string
 	Body() []byte
 	TTL() uint32
@@ -23,7 +23,7 @@ type Job interface {
 
 type jobImpl struct {
 	namespace string
-	queue     string
+	queue     Queue
 	id        string
 	body      []byte
 	ttl       uint32
@@ -36,7 +36,7 @@ type jobImpl struct {
 // NOTE: there is a trick in this factory, the delay is embedded in the jobID.
 // By doing this we can delete the job that's located in hourly AOF, by placing
 // a tombstone record in that AOF.
-func NewJob(namespace, queue string, body []byte, ttl, delay uint32, tries uint16) Job {
+func NewJob(namespace string, queue Queue, body []byte, ttl, delay uint32, tries uint16) Job {
 	id := uuid.GenUniqueJobIDWithDelay(delay)
 	return &jobImpl{
 		namespace: namespace,
@@ -49,7 +49,7 @@ func NewJob(namespace, queue string, body []byte, ttl, delay uint32, tries uint1
 	}
 }
 
-func NewJobWithID(namespace, queue string, body []byte, ttl uint32, tries uint16, jobID string) Job {
+func NewJobWithID(namespace string, queue Queue, body []byte, ttl uint32, tries uint16, jobID string) Job {
 	delay, _ := uuid.ExtractDelaySecondFromUniqueID(jobID)
 	return &jobImpl{
 		namespace: namespace,
@@ -66,7 +66,7 @@ func (j *jobImpl) Namespace() string {
 	return j.namespace
 }
 
-func (j *jobImpl) Queue() string {
+func (j *jobImpl) Queue() Queue {
 	return j.queue
 }
 
@@ -102,8 +102,9 @@ func (j *jobImpl) ElapsedMS() int64 {
 // Marshal into binary of the format:
 // {total len: 4 bytes}{ns len: 1 byte}{ns}{queue len: 1 byte}{queue}{id: 16 bytes}{ttl: 4 bytes}{tries: 2 byte}{job data}
 func (j *jobImpl) MarshalBinary() (data []byte, err error) {
+	queueName := j.queue.String()
 	nsLen := len(j.namespace)
-	qLen := len(j.queue)
+	qLen := len(queueName)
 	bodyLen := len(j.body)
 	totalSize := 1 + nsLen + 1 + qLen + 16 + 4 + 2 + bodyLen
 	buf := make([]byte, totalSize+4)
@@ -119,7 +120,7 @@ func (j *jobImpl) MarshalBinary() (data []byte, err error) {
 	buf[4] = uint8(nsLen)
 	copy(buf[nsOffset:], j.namespace)
 	buf[qOffset-1] = uint8(qLen)
-	copy(buf[qOffset:], j.queue)
+	copy(buf[qOffset:], queueName)
 	binID := uuid.UniqueIDToBinary(j.id)
 	copy(buf[idOffset:], binID[:]) // binary ID is 16 byte-long
 	binary.LittleEndian.PutUint32(buf[ttlOffset:], j.ttl)
@@ -142,7 +143,7 @@ func (j *jobImpl) UnmarshalBinary(data []byte) error {
 	j.namespace = string(data[nsOffset : nsOffset+nsLen])
 	qOffset := nsOffset + nsLen + 1
 	qLen := int(data[qOffset-1])
-	j.queue = string(data[qOffset : qOffset+qLen])
+	j.queue = NewQueue(string(data[qOffset : qOffset+qLen]))
 	idOffset := qOffset + qLen
 	var binaryID [16]byte
 	copy(binaryID[:], data[idOffset:idOffset+16])

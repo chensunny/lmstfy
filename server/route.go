@@ -13,7 +13,7 @@ import (
 func SetupRoutes(e *gin.Engine, throttler *throttler.Throttler, logger *logrus.Logger, devMode bool) {
 	handlers.Setup(logger)
 	group := e.Group("/api")
-	group.Use(handlers.ValidateParams, handlers.SetupQueueEngine)
+	group.Use(handlers.ValidateParams, handlers.SetupQueueEngine, handlers.SetupQueue)
 	if !devMode {
 		group.Use(handlers.ValidateToken)
 	}

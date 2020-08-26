@@ -43,6 +43,10 @@ func SetupQueueEngine(c *gin.Context) {
 	c.Set("engine", e)
 }
 
+func SetupQueue(c *gin.Context) {
+	c.Set("queue", engine.NewQueue(c.Param("queue")))
+}
+
 func ValidateToken(c *gin.Context) {
 	tk := c.GetString("token")
 	if tk == "" {

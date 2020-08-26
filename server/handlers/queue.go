@@ -26,7 +26,7 @@ func Publish(c *gin.Context) {
 	logger := GetHTTPLogger(c)
 	e := c.MustGet("engine").(engine.Engine)
 	namespace := c.Param("namespace")
-	queue := c.Param("queue")
+	queue := c.MustGet("queue").(engine.Queue)
 	jobID := c.Param("job_id")
 
 	if jobID != "" {

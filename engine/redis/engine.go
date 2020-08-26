@@ -57,11 +57,11 @@ func NewEngine(redisName string, conn *go_redis.Client) (engine.Engine, error) {
 	}, nil
 }
 
-func (e *Engine) Publish(namespace, queue string, body []byte, ttlSecond, delaySecond uint32, tries uint16) (jobID string, err error) {
+func (e *Engine) Publish(namespace string, queue engine.Queue, body []byte, ttlSecond, delaySecond uint32, tries uint16) (jobID string, err error) {
 	defer func() {
 		if err == nil {
 			metrics.publishJobs.WithLabelValues(e.redis.Name).Inc()
-			metrics.publishQueueJobs.WithLabelValues(e.redis.Name, namespace, queue).Inc()
+			metrics.publishQueueJobs.WithLabelValues(e.redis.Name, namespace, queue.Name(), queue.Tag()).Inc()
 		}
 	}()
 	e.meta.RecordIfNotExist(namespace, queue)
@@ -218,11 +218,11 @@ func (e *Engine) ConsumeMulti(namespace string, queues []string, ttrSecond, time
 	}
 }
 
-func (e *Engine) Delete(namespace, queue, jobID string) error {
+func (e *Engine) Delete(namespace string, queue engine.Queue, jobID string) error {
 	err := e.pool.Delete(namespace, queue, jobID)
 	if err == nil {
 		elapsedMS, _ := uuid.ElapsedMilliSecondFromUniqueID(jobID)
-		metrics.jobAckElapsedMS.WithLabelValues(e.redis.Name, namespace, queue).Observe(float64(elapsedMS))
+		metrics.jobAckElapsedMS.WithLabelValues(e.redis.Name, namespace, queue.Name(), queue.Tag()).Observe(float64(elapsedMS))
 	}
 	return err
 }

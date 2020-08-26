@@ -18,7 +18,7 @@ func NewEngine(old, new engine.Engine) engine.Engine {
 	}
 }
 
-func (e *Engine) Publish(namespace, queue string, body []byte, ttlSecond, delaySecond uint32, tries uint16) (jobID string, err error) {
+func (e *Engine) Publish(namespace string, queue engine.Queue, body []byte, ttlSecond, delaySecond uint32, tries uint16) (jobID string, err error) {
 	return e.newEngine.Publish(namespace, queue, body, ttlSecond, delaySecond, tries)
 }
 
@@ -47,7 +47,7 @@ func (e *Engine) ConsumeMulti(namespace string, queues []string, ttrSecond, time
 	return e.newEngine.ConsumeMulti(namespace, queues, ttrSecond, timeoutSecond)
 }
 
-func (e *Engine) Delete(namespace, queue, jobID string) error {
+func (e *Engine) Delete(namespace string, queue engine.Queue, jobID string) error {
 	err := e.oldEngine.Delete(namespace, queue, jobID)
 	if err != nil {
 		return err
