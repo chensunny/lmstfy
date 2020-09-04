@@ -2,7 +2,7 @@ Host = "0.0.0.0"
 Port = 8080
 AdminHost = "0.0.0.0" # optional, default to localhost
 AdminPort = 10000
-LogDir = "/dev/stdout"
+LogDir = ""
 LogLevel = "debug"
 #LogFormat = "text" # Use LogFormat="json" if wants to print the log with json format
 EnableAccessLog = true
