@@ -6,15 +6,15 @@ entry {
 	isDryRun = false
 	flow = "golang"
 	configInfo = [
-	      deploymentGroup          : "automizely",
-	      appName                  : "deployment-lmstfy",
-	      gitRepoName              : "deployment-lmstfy.git",
+	      deploymentGroup          : "aftership",
+          appName                  : "lmstfy.automizelyapi.org",
+	      gitRepoName              : "lmstfy.automizelyapi.org.git",
 	      chartName                : "golang-http",
 	      essentialDockerImage     : "golang-essential",
 	      essentialTag             : "golang-1.13.5",
 	      requireStaticAsset       : false,
 	      uploadAssetCredential    : "",
-          domainType               : "automizely",
+          domainType               : "",
 	      unitTest                 : "",
 	      integrationTest          : "",
 	      useEnvironmentVariable   : true,
