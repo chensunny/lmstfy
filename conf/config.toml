@@ -21,7 +21,10 @@ DB = 1
 
 
 [Pool]
-#[Pool.default]
+[Pool.default]
+Addr = "test-redis-lmstfy-persist-01.automizely.me:26379,test-redis-lmstfy-persist-01.automizely.me:26380,test-redis-lmstfy-persist-01.automizely.me:26381"
+MasterName = "lmstfy"
+DB = 1
 #Addr = "localhost:6379"
 # Password = foobared
 # DB = 0
@@ -29,7 +32,7 @@ DB = 1
 #[Pool.migrate]
 #Addr = "localhost:6389"
 
-[Pool.mysentinel]
+[Pool.maotai]
 Addr = "test-redis-lmstfy-persist-01.automizely.me:26379,test-redis-lmstfy-persist-01.automizely.me:26380,test-redis-lmstfy-persist-01.automizely.me:26381"
 MasterName = "lmstfy"
 DB = 1
