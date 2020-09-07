@@ -4,6 +4,4 @@ WORKDIR  ${WORK_DIR}
 
 RUN sh ./build.sh
 
-ENV BINARY=lmstfy-server
-
-CMD ["sh", "-c", "./${BINARY}"]
+ENTRYPOINT ["./lmstfy-server"]
