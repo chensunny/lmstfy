@@ -7,7 +7,7 @@ require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v0.0.0-20170702092826-d459835d2b07
-	github.com/go-redis/redis v6.15.2+incompatible
+	github.com/go-redis/redis v6.15.7+incompatible
 	github.com/google/go-cmp v0.4.0
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
