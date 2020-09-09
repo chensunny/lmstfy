@@ -133,7 +133,7 @@ func (p *Pusher) startWorker(num int) {
 						"queue":  p.Queue,
 						"job_id": job.ID(),
 						"err":    err.Error(),
-					}).Warn("Failed to send the data to user endpoint")
+					}).Debug("Failed to send the data to user endpoint")
 				}
 			}
 		case <-p.restartWorkerCh:
