@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
+	"net"
 	"net/http"
 	"strconv"
 	"sync"
@@ -40,7 +41,7 @@ func newPusher(pool, ns, queue string, meta *Meta, logger *logrus.Logger) *Pushe
 		jobCh:           make(chan engine.Job),
 		stopCh:          make(chan struct{}),
 		restartWorkerCh: make(chan struct{}),
-		httpClient:      &http.Client{Timeout: time.Duration(meta.Timeout) * time.Second},
+		httpClient:      newHttpClient(meta),
 	}
 	go pusher.pollQueue()
 	return pusher
@@ -215,3 +216,37 @@ func (p *Pusher) restart() error {
 	}).Info("Restart the pusher")
 	return nil
 }
+func newHttpClient(meta *Meta) *http.Client {
+	transport := &http.Transport{
+		Proxy: http.ProxyFromEnvironment,
+		DialContext: (&net.Dialer{
+			Timeout:   30 * time.Second,
+			KeepAlive: 20 * time.Second,
+		}).DialContext,
+		MaxIdleConns:        50,
+		MaxIdleConnsPerHost: 20,
+		MaxConnsPerHost:     0,
+		IdleConnTimeout:     60 * time.Second,
+		TLSHandshakeTimeout: 10 * time.Second,
+	}
+	//newrelic instrument
+	//http.DefaultTransport
+	//roundTripper := newrelic.NewRoundTripper(nil, transport)
+	client := &http.Client{
+		Transport: transport,
+		Timeout:   time.Duration(meta.Timeout) * time.Second,
+	}
+
+	return client
+}
+
+/*
+RequestTimeout = "30s"
+DialTimeout = "30s"
+DialKeepAlive = "20s"
+MaxIdleConns = 50
+MaxIdleConnsPerHost = 20
+MaxConnsPerHost = 50
+IdleConnTimeout = "60s"
+TLSHandshakeTimeout = "10s"
+*/
