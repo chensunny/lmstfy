@@ -3,7 +3,7 @@ Port = 8080
 AdminHost = "0.0.0.0" # optional, default to localhost
 AdminPort = 10000
 LogDir = ""
-LogLevel = "error"
+LogLevel = "info"
 #LogFormat = "text" # Use LogFormat="json" if wants to print the log with json format
 EnableAccessLog = true
 
@@ -17,6 +17,7 @@ EnableAccessLog = true
 [AdminRedis]  # redis used to store admin data, eg. tokens
 Addr = "test-redis-lmstfy-persist-01.automizely.me:26379,test-redis-lmstfy-persist-01.automizely.me:26380,test-redis-lmstfy-persist-01.automizely.me:26381"
 MasterName = "lmstfy"
+#MasterName = "mymaster"
 DB = 1
 
 
@@ -24,6 +25,7 @@ DB = 1
 [Pool.default]
 Addr = "test-redis-lmstfy-persist-01.automizely.me:26379,test-redis-lmstfy-persist-01.automizely.me:26380,test-redis-lmstfy-persist-01.automizely.me:26381"
 MasterName = "lmstfy"
+#MasterName = "mymaster"
 DB = 1
 #Addr = "localhost:6379"
 # Password = foobared
@@ -35,5 +37,6 @@ DB = 1
 [Pool.maotai]
 Addr = "test-redis-lmstfy-persist-01.automizely.me:26379,test-redis-lmstfy-persist-01.automizely.me:26380,test-redis-lmstfy-persist-01.automizely.me:26381"
 MasterName = "lmstfy"
+#MasterName = "mymaster"
 DB = 1
 
