@@ -11,7 +11,7 @@ entry {
 	      gitRepoName              : "lmstfy.automizelyapi.org.git",
 	      chartName                : "golang-http",
 	      essentialDockerImage     : "golang-essential",
-	      essentialTag             : "golang-1.13.5",
+	      essentialTag             : "golang-1.14.7",
 	      requireStaticAsset       : false,
 	      uploadAssetCredential    : "",
           domainType               : "",
