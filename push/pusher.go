@@ -92,7 +92,7 @@ func (p *Pusher) pollQueue() {
 			metrics.ConsumeLatencies.WithLabelValues(
 				p.Pool,
 				p.Namespace,
-				p.Queue).Observe(time.Since(now).Seconds() * 1000)
+				p.Queue).Observe(float64(time.Since(now).Milliseconds()))
 			/* do nothing */
 		case <-p.stopCh:
 			p.logger.WithFields(logrus.Fields{
@@ -163,7 +163,8 @@ func (p *Pusher) sendJobToUser(job engine.Job) error {
 		metrics.PushLatencies.WithLabelValues(
 			p.Pool,
 			p.Namespace,
-			p.Queue).Observe(time.Since(t).Seconds() * 1000)
+			p.Queue).Observe(float64(time.Since(t).Milliseconds()))
+
 		metrics.PushHTTPCodes.WithLabelValues(
 			p.Pool,
 			p.Namespace,
