@@ -207,8 +207,8 @@ func (p *Pusher) stop() error {
 
 func (p *Pusher) restart() error {
 	close(p.restartWorkerCh)
-	p.restartWorkerCh = make(chan struct{})
 	p.workerWg.Wait()
+    p.restartWorkerCh = make(chan struct{})
 	p.start()
 	p.logger.WithFields(logrus.Fields{
 		"pool":  p.Pool,
