@@ -18,7 +18,7 @@ func setupMetrics() {
 			Subsystem: "lmstfy_pusher",
 			Name:      "consume_latency_milliseconds",
 			Help:      "latencies",
-			Buckets:   prometheus.ExponentialBuckets(3, 3, 6),
+			Buckets:   prometheus.ExponentialBuckets(8, 4, 6),
 		},
 		[]string{"pool", "namespace", "queue"},
 	)
@@ -29,7 +29,7 @@ func setupMetrics() {
 			Subsystem: "lmstfy_pusher",
 			Name:      "push_latency_milliseconds",
 			Help:      "push http latencies",
-			Buckets:      prometheus.ExponentialBuckets(8, 4, 7),
+			Buckets:   prometheus.ExponentialBuckets(8, 4, 8),
 		},
 		[]string{"pool", "namespace", "queue"},
 	)
