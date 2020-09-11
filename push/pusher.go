@@ -38,7 +38,7 @@ func newPusher(pool, ns, queue string, meta *Meta, logger *logrus.Logger) *Pushe
 		Queue:     queue,
 		logger:    logger,
 
-		jobCh:           make(chan engine.Job),
+		jobCh:           make(chan engine.Job, maxWorkerNum),
 		stopCh:          make(chan struct{}),
 		restartWorkerCh: make(chan struct{}),
 		httpClient:      newHttpClient(meta),
@@ -208,7 +208,7 @@ func (p *Pusher) stop() error {
 func (p *Pusher) restart() error {
 	close(p.restartWorkerCh)
 	p.workerWg.Wait()
-    p.restartWorkerCh = make(chan struct{})
+	p.restartWorkerCh = make(chan struct{})
 	p.start()
 	p.logger.WithFields(logrus.Fields{
 		"pool":  p.Pool,
