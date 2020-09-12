@@ -16,7 +16,7 @@ import (
 const redisMetasKey = "__push_metas__"
 const redisMetasVersionKey = "__push_metas_version__"
 const metaKeyPrefix = "pm"
-const maxWorkerNum = 64
+const maxWorkerNum = 512
 
 var ErrInvalidKey = errors.New("invalid push meta key")
 var ErrMetaKeyExists = errors.New("the meta key has already exists")
