@@ -72,6 +72,7 @@ func NewTimer(name string, redis *RedisInstance, interval time.Duration) (*Timer
 	timer.lua_pump_sha = sha
 
 	go timer.tick()
+    go timer.tick()
 	return timer, nil
 }
 
