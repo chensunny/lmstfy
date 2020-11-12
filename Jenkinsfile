@@ -14,7 +14,7 @@ entry {
 	      essentialTag             : "golang-1.14.7",
 	      requireStaticAsset       : false,
 	      uploadAssetCredential    : "",
-          domainType               : "automizelyapi.org",
+        domainType               : "automizelyapi.org",
 	      unitTest                 : "",
 	      integrationTest          : "",
 	      useEnvironmentVariable   : true,
