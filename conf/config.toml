@@ -5,7 +5,7 @@ AdminPort = 10000
 LogDir = ""
 LogLevel = "info"
 #LogFormat = "text" # Use LogFormat="json" if wants to print the log with json format
-EnableAccessLog = true
+EnableAccessLog = false
 
 # default params
 #TTLSecond = 24 * 60 * 60 // 1 day
