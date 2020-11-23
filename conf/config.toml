@@ -35,8 +35,11 @@ DB = 1
 #Addr = "localhost:6389"
 
 [Pool.maotai]
-Addr = "test-redis-lmstfy-persist-01.automizely.me:26379,test-redis-lmstfy-persist-01.automizely.me:26380,test-redis-lmstfy-persist-01.automizely.me:26381"
-MasterName = "lmstfy"
-#MasterName = "mymaster"
-DB = 1
+#Addr = "vm-test-redis-common-cache-01-asea1a:26379,test-redis-lmstfy-persist-01.automizely.me:26380,test-redis-lmstfy-persist-01.automizely.me:26381"
+#MasterName = "lmstfy"
+##MasterName = "mymaster"
+#DB = 1
 
+Addr = "test-redis-common-cache-01.automizely.me:26379,test-redis-common-cache-02.automizely.me:26380,test-redis-common-persist-02.automizely.me:26380"
+MasterName = "common-persist-01"
+DB = 16
