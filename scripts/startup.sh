@@ -1,10 +1,16 @@
-#!/bin/sh
+#!/bin/bash
 
 
 set -e
 
 
 cp -f conf/config-local.toml   conf/config.toml
+
+if [ -z $NODE_ENV ]; then
+   NODE_ENV="local"
+fi
+
+echo "NODE_ENV = $NODE_ENV"
 
 if [ $NODE_ENV = "testing" ];then
    cp -f conf/config-testing.toml   conf/config.toml
