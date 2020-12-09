@@ -4,4 +4,4 @@ WORKDIR  ${WORK_DIR}
 
 RUN sh ./build.sh
 
-ENTRYPOINT ["./lmstfy-server"]
+ENTRYPOINT ['./sartup.sh']
