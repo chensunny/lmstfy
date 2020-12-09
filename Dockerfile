@@ -4,4 +4,4 @@ WORKDIR  ${WORK_DIR}
 
 RUN sh ./build.sh
 
-ENTRYPOINT ['./sartup.sh']
+ENTRYPOINT ['./scripts/sartup.sh']
