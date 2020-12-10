@@ -21,6 +21,11 @@ DB = 0
 
 
 [Pool]
+[Pool.default]
+Addr = "prod-redis-sentinel-01.automizely.org:26379,prod-redis-sentinel-02.automizely.org:26379,prod-redis-sentinel-03.automizely.org:26379"
+MasterName = "lmstfy.automizelyapi.org-01"
+DB = 0
+
 [Pool.cluster-0]
 Addr = "prod-redis-sentinel-01.automizely.org:26379,prod-redis-sentinel-02.automizely.org:26379,prod-redis-sentinel-03.automizely.org:26379"
 MasterName = "lmstfy.automizelyapi.org-01"
