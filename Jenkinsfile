@@ -20,7 +20,7 @@ entry {
 	      useEnvironmentVariable   : true,
 	      hasReleaseEnvironment    : false,
 	      hasStagingEnvironment    : false,
-	      hasProductionEnvironment : false,
+	      hasProductionEnvironment : true,
 	      useHelmReleaseShortName  : true
 	    ]
 }
