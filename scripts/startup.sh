@@ -11,13 +11,14 @@ if [ -z $NODE_ENV ]; then
 fi
 
 echo "NODE_ENV = $NODE_ENV"
+echo "NEW_RELIC_APP_NAME = $NEW_RELIC_APP_NAME"
 
 if [ $NODE_ENV = "testing" ];then
    cp -f conf/config-testing.toml   conf/config.toml
 fi
 
-if [ $NODE_ENV = "production" ];then
-    cp -f conf/config-production.toml   conf/config.toml
+if [ $NEW_RELIC_APP_NAME = "lmstfy.automizelyapi.org_couriers-scheduler-production" ];then
+    cp -f conf/config-couriers-scheduler-production.toml   conf/config.toml
 fi
 
 exec ./lmstfy-server -c  conf/config.toml
