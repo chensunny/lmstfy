@@ -7,7 +7,7 @@ entry {
 	flow = "golang"
 	configInfo = [
 	      deploymentGroup          : "aftership",
-          appName                  : "lmstfy.automizelyapi.org_main",
+          appName                  : "lmstfy.automizelyapi.org_couriers-scheduler,
 	      gitRepoName              : "lmstfy.automizelyapi.org_main.git",
 	      chartName                : "golang-http",
 	      essentialDockerImage     : "golang-essential",
