@@ -16,30 +16,30 @@ EnableAccessLog = false
 
 [AdminRedis]  # redis used to store admin data, eg. tokens
 Addr = "prod-redis-sentinel-01.automizely.org:26379,prod-redis-sentinel-02.automizely.org:26379,prod-redis-sentinel-03.automizely.org:26379"
-MasterName = "lmstfy.automizelyapi.org-01"
+MasterName = "lmstfy-coueriers-scheduler.automizelyapi.org-00"
 DB = 0
 
 
 [Pool]
 [Pool.default]
 Addr = "prod-redis-sentinel-01.automizely.org:26379,prod-redis-sentinel-02.automizely.org:26379,prod-redis-sentinel-03.automizely.org:26379"
-MasterName = "lmstfy.automizelyapi.org-01"
+MasterName = "lmstfy-coueriers-scheduler.automizelyapi.org-00"
 DB = 0
 
 [Pool.cluster-0]
 Addr = "prod-redis-sentinel-01.automizely.org:26379,prod-redis-sentinel-02.automizely.org:26379,prod-redis-sentinel-03.automizely.org:26379"
-MasterName = "lmstfy.automizelyapi.org-01"
+MasterName = "lmstfy-coueriers-scheduler.automizelyapi.org-00"
 DB = 0
 
 
 [Pool.cluster-1]
 Addr = "prod-redis-sentinel-01.automizely.org:26379,prod-redis-sentinel-02.automizely.org:26379,prod-redis-sentinel-03.automizely.org:26379"
-MasterName = "lmstfy.automizelyapi.org-02"
+MasterName = "lmstfy-coueriers-scheduler.automizelyapi.org-01"
 DB = 0
 
 
 [Pool.cluster-2]
 Addr = "prod-redis-sentinel-01.automizely.org:26379,prod-redis-sentinel-02.automizely.org:26379,prod-redis-sentinel-03.automizely.org:26379"
-MasterName = "lmstfy.automizelyapi.org-03"
+MasterName = "lmstfy-coueriers-scheduler.automizelyapi.org-02"
 DB = 0
 
