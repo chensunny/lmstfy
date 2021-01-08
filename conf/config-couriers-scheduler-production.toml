@@ -43,3 +43,13 @@ Addr = "prod-redis-sentinel-01.automizely.org:26379,prod-redis-sentinel-02.autom
 MasterName = "lmstfy-coueriers-scheduler.automizelyapi.org-02"
 DB = 0
 
+
+[Pool.cluster-3]
+Addr = "prod-redis-sentinel-01.automizely.org:26379,prod-redis-sentinel-02.automizely.org:26379,prod-redis-sentinel-03.automizely.org:26379"
+MasterName = "lmstfy-coueriers-scheduler.automizelyapi.org-03"
+DB = 0
+
+[Pool.cluster-4]
+Addr = "prod-redis-sentinel-01.automizely.org:26379,prod-redis-sentinel-02.automizely.org:26379,prod-redis-sentinel-03.automizely.org:26379"
+MasterName = "lmstfy-coueriers-scheduler.automizelyapi.org-04"
+DB = 0
