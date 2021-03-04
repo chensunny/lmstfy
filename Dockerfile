@@ -1,9 +1,8 @@
-FROM golang:1.15.6
+FROM us.gcr.io/aftership-admin/jenkins/golang-onbuild:golang-1.15.3
 
-WORKDIR /lmstfy
-ADD ./ /lmstfy
-RUN apt update -y && apt install -y netcat
-RUN cd /lmstfy && make
-EXPOSE 7777:7777
-ENTRYPOINT ["/lmstfy/_build/lmstfy-server", "-c", "/lmstfy/config/docker-image-conf.toml"]
+WORKDIR  ${WORK_DIR}
 
+RUN sh ./build.sh
+RUN pwd
+
+ENTRYPOINT ["./scripts/startup.sh"]

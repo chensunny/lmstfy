@@ -1,9 +1,10 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
-	"net/http"
 
 	"github.com/bitleak/lmstfy/server/handlers"
 	"github.com/bitleak/lmstfy/throttler"
@@ -48,6 +49,9 @@ func SetupRoutes(e *gin.Engine, throttler *throttler.Throttler, logger *logrus.L
 	pubGroup.GET("/:namespace/:queue/size", handlers.Size)
 	pubGroup.GET("/:namespace/:queue/deadletter/size", handlers.GetDeadLetterSize)
 
+	// healthz check
+	healthGroup := e.Group("/")
+	healthGroup.GET("/whoami", handlers.Healthz)
 	e.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "api not found"})
 	})
