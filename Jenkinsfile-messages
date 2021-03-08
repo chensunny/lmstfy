@@ -7,11 +7,11 @@ entry {
 	flow = "golang"
 	configInfo = [
 	      deploymentGroup          : "aftership",
-          appName                  : "lmstfy.automizelyapi.org_main",
+          appName                  : "lmstfy.automizelyapi.org_messages",
 	      gitRepoName              : "lmstfy.automizelyapi.org_main.git",
 	      chartName                : "golang-http",
 	      essentialDockerImage     : "golang-essential",
-	      essentialTag             : "golang-1.15.3",
+	      essentialTag             : "golang-1.14.7",
 	      requireStaticAsset       : false,
 	      uploadAssetCredential    : "",
           domainType               : "automizelyapi.org",
@@ -20,8 +20,7 @@ entry {
 	      useEnvironmentVariable   : true,
 	      hasReleaseEnvironment    : false,
 	      hasStagingEnvironment    : false,
-	      hasProductionEnvironment : false,
+	      hasProductionEnvironment : true,
 	      useHelmReleaseShortName  : true
-
 	    ]
 }

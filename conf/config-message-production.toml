@@ -1,0 +1,31 @@
+Host = "0.0.0.0"
+Port = 8080
+AdminHost = "0.0.0.0" # optional, default to localhost
+AdminPort = 10000
+LogDir = ""
+LogLevel = "info"
+#LogFormat = "text" # Use LogFormat="json" if wants to print the log with json format
+EnableAccessLog = false
+
+# default params
+#TTLSecond = 24 * 60 * 60 // 1 day
+#DelaySecond = 0
+#TriesNum = 1
+#TTRSecond = 2 * 60 // 2 minutes
+#TimeoutSecond = 0  // means non-blocking
+
+[AdminRedis]  # redis used to store admin data, eg. tokens
+#Addr = "localhost:6379"
+Addr = "prod-redis-automizely-messages01.automizely.org:26379,prod-redis-automizely-messages02.automizely.org:26379,prod-redis-automizely-lmstfy01.automizely.org:26380"
+MasterName = "lmstfy-messages"
+# Password = foobared
+
+[Pool]
+
+[Pool.default]
+Addr = "prod-redis-automizely-messages01.automizely.org:26379,prod-redis-automizely-messages02.automizely.org:26379,prod-redis-automizely-lmstfy01.automizely.org:26380"
+MasterName = "lmstfy-messages"
+
+[Pool.msg]
+Addr = "prod-redis-automizely-messages01.automizely.org:26379,prod-redis-automizely-messages02.automizely.org:26379,prod-redis-automizely-lmstfy01.automizely.org:26380"
+MasterName = "lmstfy-messages"
